@@ -7,12 +7,14 @@ const year="2023"
 
 describe("Logg in feature", () => {
     beforeEach(() => {
+        cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.visit("https://www.demoblaze.com/index.html#");
     });
     it("Validating successful login", () => {
+
         cy.get("#login2").click();
-        
-        cy.get("#loginusername").type(User);
+        cy.get("#loginusername").should("be.visible");
+        cy.get("#loginusername").type(User, {force:true});
         cy.get("#loginpassword").type(password)
         
         cy.contains("button","Log in").click(); 
@@ -22,6 +24,7 @@ describe("Logg in feature", () => {
 
 describe("Add to cart", ()=>{
     beforeEach(()=> {
+        cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.visit("https://www.demoblaze.com/index.html#")
     })
     it("Successful purchase of products and ", ()=>{
@@ -51,6 +54,7 @@ describe("Add to cart", ()=>{
 })
 describe("send a message", ()=>{
     beforeEach(()=> {
+        cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.visit("https://www.demoblaze.com/index.html#")
     })
     it("successful shipment", ()=>{

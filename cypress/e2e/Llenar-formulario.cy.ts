@@ -2,8 +2,8 @@ import { PersonalFormPage } from "../page/personalFormPage";
 const personalFormPage = new PersonalFormPage();
 describe("Llenar formulario", () => {
   before("visitar pagina", () => {
+    cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
     personalFormPage.visitPage();
-  
   });
   it("Llenar el formulario", () => {
     
